@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "////div[contains(@class, \"X-overlay lay-footer\")]//div[contains(@class, \"x-overlay-footer_apply\")]//button[@aria-label=\"Apply\"]"
+}

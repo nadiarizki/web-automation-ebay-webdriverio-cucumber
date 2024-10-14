@@ -1,16 +1,15 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
 import HomePage from '../pageobjects/home.page.js';
-import cellphoneAccessoriesPage from '../pageobjects/cellphone.accessories.page.js';
-import cellphoneSmartphonesPage from '../pageobjects/cellphone.smartphones.page.js';
-import homePage from '../pageobjects/home.page.js';
-import searchResultPage from '../pageobjects/searchresult.page.js';
-import filterResultPage from '../pageobjects/filterresult.page.js';
+import CellphoneAccessoriesPage from '../pageobjects/cellphone.accessories.page.js';
+import CellphoneSmartphonesPage from '../pageobjects/cellphone.smartphones.page.js';
+import SearchResultPage from '../pageobjects/searchresult.page.js';
+import FilterResultPage from '../pageobjects/filterresult.page.js';
 
 
 Given('user is on the Homepage', async () => {
-    await browser.maximizeWindow()
+    await browser.maximizeWindow();
     await HomePage.open();
-    await browser.pause(3000);
+    
 });
 
 When('user clicks Cell Phones & Accessories category', async () => {
@@ -18,35 +17,57 @@ When('user clicks Cell Phones & Accessories category', async () => {
 });
 
 Then('user should be redirected to the Cellphone & Accessories page', async () => {
-    await cellphoneAccessoriesPage.validateOnCellphoneAccessoriesPage();
+    await CellphoneAccessoriesPage.validateOnCellphoneAccessoriesPage();
 });
 
 When('user clicks Cell Phones & Smartphones category', async () => {
-    await cellphoneAccessoriesPage.openCellphoneSmartphone();
+    await CellphoneAccessoriesPage.openCellphoneSmartphone();
 });
 
 Then('user should be redirected to the Cell Phones & Smartphones page', async () => {
-    await cellphoneSmartphonesPage.validateOnCellphonesSmartphonesPage();    
+    await CellphoneSmartphonesPage.validateOnCellphonesSmartphonesPage();    
 });
 
 When('user clicks All Filters', async () => {
-    await cellphoneSmartphonesPage.clickAllFilters();
+    await CellphoneSmartphonesPage.clickAllFilters();
 });
 
-When('user adds multiple filters', async () => {
-    await cellphoneSmartphonesPage.addMultipleFilters();
+When('user adds Condition filter', async () => {
+    await CellphoneSmartphonesPage.addConditionFilter();
 });
 
-Then('user should see selected filters', async () => {
-    await filterResultPage.validateFilterResult();
+
+Then('user should see button displaying selected condition', async () => {
+    await CellphoneSmartphonesPage.validateConditionFilterAdded();
+});
+
+
+When('user adds Price filter', async () => {
+    await CellphoneSmartphonesPage.addPriceFilter();
+});
+
+Then('user should see button displaying selected price range', async () => {
+    await CellphoneSmartphonesPage.validateConditionFilterAdded();
+});
+
+When('user adds Item Location filter', async () => {
+    await CellphoneSmartphonesPage.addItemLocationFilter();
+});
+
+Then('user should see button displaying selected location', async () => {
+    await CellphoneSmartphonesPage.validateItemLocationFilterAdded();
+});
+
+Then('user should see number of selected filters', async () => {
+    await CellphoneSmartphonesPage.validateNumberOfFiltersAdded();
 }); 
 
 When('user clicks Apply button', async () => {
-    await cellphoneSmartphonesPage.applyFilters();
+    await CellphoneSmartphonesPage.applyFilters();
 });
 
 Then('user should see the filter tags are applied', async () => {
-    await filterResultPage.validateFilterResult();
+    await FilterResultPage.validateFilterResult();
 });
 
 When('user types {string} in the search bar', async (item) => {
@@ -58,9 +79,9 @@ When('user selects {string} category from dropdown', async (category) => {
 });
 
 When('user clicks Search button', async () => {
-    await homePage.clickSearchButton();
+    await HomePage.clickSearchButton();
 });
 
 Then('user should see search results for {string}', async (searchString) => {
-    await searchResultPage.validateSearchResult(searchString);
+    await SearchResultPage.validateSearchResult(searchString);
 });

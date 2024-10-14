@@ -1,54 +1,34 @@
-
-import { $ } from '@wdio/globals'
+import { $ } from '@wdio/globals';
 import Page from './page.js';
 
-class cellphoneAccessoriesPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get shopByCategory () {
+class CellphoneAccessoriesPage extends Page {
+    get shopByCategory() {
         return $('#gh-shop-a');
     }
 
-    get cellphoneAccessories () {
+    get cellphoneAccessories() {
         return $('//a[normalize-space()="Cell phones & accessories"]');        
     }
 
-    get smartphonesBanner () {
-
+    get smartphonesBanner() {
         return $('//h1[normalize-space()="Smartphones & Smartwatches"]');        
-        
-
     }
 
     get cellphoneSmartphone() {
-        return $('//a[contains(text(),"Cell Phones & Smartphones")]')
+        return $('//a[contains(text(),"Cell Phones & Smartphones")]');
     }
 
-
-    async validateOnCellphoneAccessoriesPage () {
-        await expect(browser).toHaveUrl('https://www.ebay.com/b/Cell-Phones-Smart-Watches-Accessories/15032/bn_1865441');
+    async validateOnCellphoneAccessoriesPage() {
+        await browser.waitUntil(async () => await browser.getUrl() === 'https://www.ebay.com/b/Cell-Phones-Smart-Watches-Accessories/15032/bn_1865441', {
+            timeout: 5000,
+            timeoutMsg: 'Expected to be on Cell Phones & Accessories page'
+        });
         await expect(this.smartphonesBanner).toBeExisting();
-        var title = browser.getTitle()
-        console.log(title);
-        //await expect(browser).toHaveTitle('Swag Labs');
-
-        
     }
 
-    async openCellphoneSmartphone () {
-        await this.cellphoneSmartphone.click();
-    }
-
-    
-
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    open () {
-        return super.open('');
+    async openCellphoneSmartphone() {
+        await this.cellphoneSmartphone.click(); 
     }
 }
 
-export default new cellphoneAccessoriesPage();
-
+export default new CellphoneAccessoriesPage();

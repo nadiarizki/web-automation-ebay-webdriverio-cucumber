@@ -1,0 +1,4 @@
+{
+  "using": "xpath",
+  "value": "//span[@class=\"x-overlay-aspect__label\"][normalize-space()=\"Item Location\"]"
+}

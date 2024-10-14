@@ -1,0 +1,4 @@
+{
+  "using": "css selector",
+  "value": "div#c3-subPanel-location_North%20America"
+}
